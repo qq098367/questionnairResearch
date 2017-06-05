@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="25dp"
+    android:layout_marginRight="15dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView_item_fragment_mainpage_last_mission"
+            android:layout_width="39dp"
+            android:layout_height="39dp"
+            android:src="@drawable/each_local_file_icon"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            />
+
+        <TextView
+            android:id="@+id/textView_item_fragment_mainpage_last_mission_name"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:id="@+id/textView_item_fragment_mainpage_last_mission_finish"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:textSize="20dp"
+            android:gravity="right"
+            android:layout_marginRight="30dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/line_item_fragment_mainpage_last_mission_finish"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        android:background="#B9BDB9"></LinearLayout>
+</LinearLayout>
