@@ -116,7 +116,7 @@ public class MyHttpConnection {
         try {
             HttpResponse response=client.execute(get);
             InputStream in=response.getEntity().getContent();
-            int i=response.getStatusLine().getStatusCode();
+//            int i=response.getStatusLine().getStatusCode();
             bitmap= BitmapFactory.decodeStream(in);
             in.close();
         } catch (IOException e) {

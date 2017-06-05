@@ -1,8 +1,10 @@
 package com.example.administrator.ttt_test.fragment.download.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,32 +93,54 @@ public class DownPageAdapter extends RecyclerView.Adapter {
             ((mViewHolder)holder).iv_fileImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    final Handler handler=new Handler(){
-                        @Override
-                        public void handleMessage(Message msg) {
-                            super.handleMessage(msg);
-                            if(msg.obj.toString().isEmpty()){
-                                Toast.makeText(context,"下载失败",Toast.LENGTH_SHORT).show();
-                            }
-                            else {
-                                MyFile myFile=new MyFile(dataList.get(position).getQuestionnaireId()+"",context);
-                                myFile.setResearchId(dataList.get(position).getResearchId());
-                                myFile.setPublishDate(dataList.get(position).getPublishTime());
-                                myFile.writeFile(msg.obj.toString(),true);
-                                ((mViewHolder)holder).iv_fileImage.setImageResource(R.drawable.download_finish);
 
-                            }
-                        }
-                    };
-                    new Thread(){
+                    AlertDialog.Builder builder=new AlertDialog.Builder(context);
+                    builder.setMessage("您确定要下载“"+((mViewHolder)holder).tv_fileName.getText().toString()+"”么？");
+                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                         @Override
-                        public void run() {
-                            super.run();
-                            List<NameValuePair> tempList=new ArrayList<NameValuePair>();
-                            MyHttpConnection httpConnection=new MyHttpConnection("/QesManageRest/displayQuestionnaire/"+dataList.get(position).getQuestionnaireId(),tempList,handler);
-                            httpConnection.startGetConnection();
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
                         }
-                    }.start();
+                    });
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            final Handler handler=new Handler(){
+                                @Override
+                                public void handleMessage(Message msg) {
+                                    super.handleMessage(msg);
+                                    if(msg.obj.toString().isEmpty()){
+                                        Toast.makeText(context,"下载失败",Toast.LENGTH_SHORT).show();
+                                    }
+                                    else {
+                                        MyFile myFile=new MyFile(dataList.get(position).getQuestionnaireId()+"",context);
+                                        myFile.setResearchId(dataList.get(position).getResearchId());
+                                        myFile.setPublishDate(dataList.get(position).getPublishTime());
+                                        myFile.writeFile(msg.obj.toString(),true);
+                                        ((mViewHolder)holder).iv_fileImage.setImageResource(R.drawable.download_finish);
+
+                                    }
+                                }
+                            };
+                            new Thread(){
+                                @Override
+                                public void run() {
+                                    super.run();
+                                    List<NameValuePair> tempList=new ArrayList<NameValuePair>();
+                                    MyHttpConnection httpConnection=new MyHttpConnection("/QesManageRest/displayQuestionnaire/"+dataList.get(position).getQuestionnaireId(),tempList,handler);
+                                    httpConnection.startGetConnection();
+                                }
+                            }.start();
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    AlertDialog dialog=builder.create();
+                    dialog.show();
+
+
+
+
                 }
             });
         }

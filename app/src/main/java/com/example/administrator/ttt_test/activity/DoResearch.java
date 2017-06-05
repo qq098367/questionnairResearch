@@ -17,6 +17,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -653,6 +654,50 @@ public class DoResearch extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK && event.getRepeatCount()==0){
+            AlertDialog.Builder builder=new AlertDialog.Builder(DoResearch.this);
+            builder.setMessage("您是否要放弃本次问卷填写？");
+            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                    AlertDialog.Builder builderConfirm=new AlertDialog.Builder(DoResearch.this);
+                    builderConfirm.setMessage("是否要保存此次填写内容？（如选择“是”，会覆盖上次保存内容）");
+                    builderConfirm.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            saveUnfinishResult();
+                            saveLastMission();
+                            dialogInterface.dismiss();
+                            DoResearch.this.finish();
+                        }
+                    });
+                    builderConfirm.setNegativeButton("否", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            saveLastMission();
+                            dialogInterface.dismiss();
+                            DoResearch.this.finish();
+                        }
+                    });
+                    AlertDialog dialog=builderConfirm.create();
+                    dialog.show();
+                }
+            });
+            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+            AlertDialog dialog=builder.create();
+            dialog.show();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     public JSONArray loadResultFile(){
         MyFile myFile=new MyFile(questionnaire.getQuestionnaireId()+"NotUpload",DoResearch.this);
         String data=myFile.readFile();
@@ -831,6 +876,8 @@ public class DoResearch extends AppCompatActivity {
         }
 
     }
+
+
 
 
 }

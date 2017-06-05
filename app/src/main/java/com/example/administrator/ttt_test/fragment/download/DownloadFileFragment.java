@@ -91,6 +91,14 @@ public class DownloadFileFragment extends Fragment {
         return contactsLayout;
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+
+        initData();
+
+    }
+
     public void setHaveDownloadAdapter(){
         Context context=DownloadFileFragment.this.getActivity();
         LinearLayoutManager manager=new LinearLayoutManager(context);

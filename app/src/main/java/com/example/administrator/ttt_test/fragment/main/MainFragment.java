@@ -101,45 +101,6 @@ public class MainFragment extends Fragment {
         return contactsLayout;
     }
 
-
-//    private void initData(){
-//        NoticeTest test4=new NoticeTest();
-//        test4.setContent("第四条新通知");
-//        test4.setTime("2017/4/1");
-//        list.add(test4);
-//
-//        NoticeTest test3=new NoticeTest();
-//        test3.setContent("第三条新通知");
-//        test3.setTime("2017/3/28");
-//        list.add(test3);
-//
-//        NoticeTest test2=new NoticeTest();
-//        test2.setContent("第二条新通知");
-//        test2.setTime("2017/3/20");
-//        list.add(test2);
-//
-//        NoticeTest test1=new NoticeTest();
-//        test1.setContent("第一条新通知");
-//        test1.setTime("2017/3/15");
-//        list.add(test1);
-//
-//        NoticeTest test5=new NoticeTest();
-//        test5.setContent("旧的通知");
-//        test5.setTime("2017/3/10");
-//        list.add(test5);
-//
-//        NoticeTest test6=new NoticeTest();
-//        test6.setContent("旧的通知");
-//        test6.setTime("2017/3/8");
-//        list.add(test6);
-//
-//        NoticeTest test7=new NoticeTest();
-//        test7.setContent("旧的通知");
-//        test7.setTime("2017/3/3");
-//        list.add(test7);
-//
-//    }
-
     private void setNotLoginNotice(){
         SingleAdapter adapter=new SingleAdapter();
         LinearLayoutManager manager=new LinearLayoutManager(MainFragment.this.getActivity());
