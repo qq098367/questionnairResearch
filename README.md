@@ -1,2 +1,4 @@
 # questionnairResearch
 疾病问卷调查系统
+
+添加Fragment切换动画效果失败，因为用的不是v4的Fragment类，牵涉的代码太多没法改了
